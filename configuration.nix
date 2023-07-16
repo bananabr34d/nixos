@@ -12,8 +12,10 @@
     ];
   
 
-  age.secrets."smb-creds.file" = {
-    file = "./secrets/smb-creds.age";
+  age.secrets.smb-creds.file = ./secrets/smb-creds.age;
+  age.secrets.secret1 = {
+    file = ./secrets/secret1.age;
+    path = "../secrets";
   };
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -114,6 +116,7 @@
     git
     micro
     neofetch
+    nerdfonts
  #  wget
   ];
 

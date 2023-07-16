@@ -3,6 +3,7 @@
 {
   imports = [
     ./zsh.nix
+    ./nvim.nix
   ];
   home.username = "joe";
   home.homeDirectory = "/home/joe";
