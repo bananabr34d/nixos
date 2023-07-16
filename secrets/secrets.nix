@@ -7,5 +7,6 @@ let
 in
 {
  "secret1.age".publicKeys = [ joe nixos ];
+ "smb-creds.age".publicKeys = users ++ systems;
  ###  "./encrypt/smb-creds.age".publicKeys = users ++ systems;
 }

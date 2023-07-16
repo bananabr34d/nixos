@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./cifs-mount.nix
     ];
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -93,8 +94,6 @@
     ];
   };
   
-  age.secrets.secret1.file = ../secrets/secret1.age;
-
   programs.zsh.enable = true;
   environment.shells = with pkgs; [ zsh ];
 
