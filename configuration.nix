@@ -11,6 +11,11 @@
       ./cifs-mount.nix
     ];
   
+
+  age.secrets."smb-creds.file" = {
+    file = "./secrets/smb-creds.age";
+  };
+  
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

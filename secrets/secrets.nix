@@ -4,9 +4,9 @@ let
 
   nixos = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBVL0NJIpTD1VuEhLBAbQHK4he5MOM4tUGRjTccvIEXd root@nixos";
   systems = [ nixos ];
-in
-{
+
+in {
  "secret1.age".publicKeys = [ joe nixos ];
- "smb-creds.age".publicKeys = users ++ systems;
+ "smb-creds.age".publicKeys = [ joe nixos ];
  ###  "./encrypt/smb-creds.age".publicKeys = users ++ systems;
 }
