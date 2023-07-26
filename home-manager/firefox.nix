@@ -19,6 +19,12 @@
           SkipOnboarding = true;
         };
       };
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        multi-account-containers
+        ublock-origin
+        vimium
+        bitwarden
+      ];
       extraPolicies = {
         ExtensionSettings = {};
       };

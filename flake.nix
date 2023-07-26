@@ -7,6 +7,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nur.url = "github:nix-community/NUR/master";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
@@ -15,7 +16,7 @@
     agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, nixos-generators, agenix, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, nur, nixos-hardware, nixos-generators, agenix, ... } @ inputs:
   let
     inherit (self) outputs;
     system = "x86_64-linux";
