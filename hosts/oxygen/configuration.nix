@@ -11,7 +11,7 @@
       ./cifs-mount.nix
       ../../desktop
       ./host.nix
-      ./firefox.nix
+      # ./firefox.nix
     ];
 
   age.secrets.smb-creds.file = ../../secrets/smb-creds.age;
@@ -89,7 +89,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEmCKT5Ig6KypKwP+F9L2bizDGzri/IRMMQiU9DWVkpO hydrogen"
     ];
     packages = with pkgs; [
-      # firefox
+      firefox
     ];
   };
   programs.zsh.enable = true;
