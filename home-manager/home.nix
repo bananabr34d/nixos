@@ -4,6 +4,7 @@
   imports = [
     ./zsh.nix
     ./nvim.nix
+    ./firefox.nix
   ];
   home.username = "joe";
   home.homeDirectory = "/home/joe";
