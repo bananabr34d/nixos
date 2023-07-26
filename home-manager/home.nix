@@ -9,44 +9,44 @@
   home.homeDirectory = "/home/joe";
   home.stateVersion = "23.05";
   home.packages = with pkgs; [
-    telegram-desktop 
-    bat 
-    bitwarden 
-    btop 
-    cava 
-    element-desktop 
-    erdtree 
-    fd 
-    htop-vim 
+    telegram-desktop
+    bat
+    bitwarden
+    btop
+    cava
+    element-desktop
+    erdtree
+    fd
+    htop-vim
     kitty
     kitty-themes
-    lazygit 
-    lf 
-    libreoffice-fresh 
+    lazygit
+    lf
+    libreoffice-fresh
     logseq
-    micro 
+    micro
     mullvad-browser
-    neovim 
-    picom 
-    polybar 
+#    neovim
+    picom
+    polybar
     protonvpn-gui
-    protonvpn-cli 
-    ripgrep 
-    signal-desktop 
+    protonvpn-cli
+    ripgrep
+    signal-desktop
     standardnotes
-    sxhkd 
-    tailscale 
+    sxhkd
+    tailscale
     tldr
-    tmux 
+    tmux
     tor-browser-bundle-bin
-    ueberzugpp 
-    graphicsmagick 
-    ffmpeg 
-    ffmpegthumbnailer 
-    zathura 
-    poppler 
+    ueberzugpp
+    graphicsmagick
+    ffmpeg
+    ffmpegthumbnailer
+    zathura
+    poppler
     ghostscript
-    xclip 
+    xclip
     yt-dlp
   ];
 }

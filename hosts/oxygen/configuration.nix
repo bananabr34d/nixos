@@ -9,21 +9,25 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./cifs-mount.nix
+      ../../desktop
+      ./host.nix
+      ./firefox.nix
     ];
-  
 
-  age.secrets.smb-creds.file = ./secrets/smb-creds.age;
-  age.secrets.secret1 = {
-    file = ./secrets/secret1.age;
-    path = "../secrets";
-  };
-  
+  age.secrets.smb-creds.file = ../../secrets/smb-creds.age;
+  # age.secrets.secret1 = {
+  #   file = ../../secrets/secret1.age;
+  #   path = "../../../secrets";
+  #   mode = "770";
+  #   owner = "joe";
+  #   group = "users";
+  # };
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "oxygen"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -51,19 +55,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -89,18 +80,18 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.joe = {
+    hashedPassword = "$y$j9T$h/hw.aiwCewxYqcQZrj0j/$.Z8G1p2BfVDRHS6Pee4PciEXXhSHLFbUlyBVoPzg3v4";
     isNormalUser = true;
-    description = "Joe";
+    description = "joe";
     shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEmCKT5Ig6KypKwP+F9L2bizDGzri/IRMMQiU9DWVkpO hydrogen"
     ];
     packages = with pkgs; [
-      firefox
+      # firefox
     ];
   };
-  
   programs.zsh.enable = true;
   environment.shells = with pkgs; [ zsh ];
 
@@ -114,6 +105,7 @@
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     curl
     git
+    gh
     micro
     neofetch
     nerdfonts
@@ -133,13 +125,13 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    passwordAuthentication = false;
+    settings.PasswordAuthentication = true;
   };
 
   # Enable qemu guest mode
   services.qemuGuest.enable = true;
 
-  # Enable docker  
+  # Enable docker
   virtualisation.docker.enable = true;
 
   # Open ports in the firewall.

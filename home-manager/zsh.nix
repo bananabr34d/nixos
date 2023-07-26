@@ -3,11 +3,11 @@
     enable = true;
     enableCompletion = true;
     enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting.enable= true;
     oh-my-zsh = {
       enable = true;
       plugins = [ "docker-compose" "docker" ];
-      theme = "dst";
+      theme = "robbyrussell";
     };
     initExtra = ''
       bindkey '^f' autosuggest-accept

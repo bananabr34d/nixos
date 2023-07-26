@@ -24,17 +24,15 @@ $drive
    |
    └── $system (system partition, LUKS2 + btrfs)
            |
-           ├── @ (mounted as /)
+           ├── / (mounted as /root)
            |       |
-           |       ├── /home (mounted @home subvolume)
+           ├── /home (mounted as /home)
            |       |
-           |       ├── /boot (mounted boot partition)
+           ├── /nix (mounted as /nix)
            |       |
-           |       └── /.snapshots (mounted @snapshots subvolume)
-           |
-           ├── @home (mounted as /home)
-           |
-           └── @snapshots (mounted as /.snapshots)
+           ├── /persist (mounted as /persist)
+           |       |
+           ├── /var/log (mounted as /log)
 "
 
 echo
@@ -62,18 +60,25 @@ mkfs.btrfs /dev/mapper/enc
 
 # setup subvolumes
 mount -t btrfs /dev/mapper/enc /mnt
-btrfs subvolume create /mnt/@
-btrfs subvolume create /mnt/@home
-btrfs subvolume create /mnt/@snapshots
+btrfs subvolume create /mnt/root
+btrfs subvolume create /mnt/home
+btrfs subvolume create /mnt/nix
+btrfs subvolume create /mnt/persist
+btrfs subvolume create /mnt/log
+# We then take an empty *readonly* snapshot of the root subvolume,
+# which we'll eventually rollback to on every boot.
+btrfs subvolume snapshot -r /mnt/root /mnt/root-blank
 umount /mnt
 
 # mount subvolumes
 read -p "enter zstd compression level (default: 1): " -r
 compression_level=${REPLY:-1}
-mount -o subvol=@,compress-force=zstd:"$compression_level",noatime /dev/mapper/enc /mnt
-mkdir /mnt/{home,.snapshots,boot}
-mount -o subvol=@home,compress-force=zstd:"$compression_level",noatime /dev/mapper/enc /mnt/home
-mount -o subvol=@snapshots,compress-force=zstd:"$compression_level",noatime /dev/mapper/enc /mnt/.snapshots
+mount -o subvol=root,compress-force=zstd:"$compression_level",noatime /dev/mapper/enc /mnt
+mkdir -p /mnt/{home,nix,persist,var/log,boot}
+mount -o subvol=home,compress-force=zstd:"$compression_level",noatime /dev/mapper/enc /mnt/home
+mount -o subvol=nix,compress-force=zstd:"$compression_level",noatime /dev/mapper/enc /mnt/nix
+mount -o subvol=persist,compress-force=zstd:"$compression_level",noatime /dev/mapper/enc /mnt/persist
+mount -o subvol=log,compress-force=zstd:"$compression_level",noatime /dev/mapper/enc /mnt/var/log
 mount "$boot" /mnt/boot
 
 # generate hardware-configuration.nix
