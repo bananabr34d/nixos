@@ -5,7 +5,7 @@
     ./zsh.nix
     ./nvim.nix
     ./kitty.nix
-    ./firefox.nix
+    # ./firefox.nix
   ];
   home.username = "joe";
   home.homeDirectory = "/home/joe";
