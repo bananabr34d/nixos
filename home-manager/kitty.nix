@@ -1,5 +1,6 @@
 {
   programs.kitty = {
+    enable = true;
     font = "JetBrainsMono Nerd Font";
     settings = {
       background_opacity = "0.90";

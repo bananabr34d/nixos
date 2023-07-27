@@ -20,7 +20,7 @@
     erdtree
     fd
     htop-vim
-    kitty
+#    kitty
     kitty-themes
     lazygit
     lf
