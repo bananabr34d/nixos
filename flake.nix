@@ -2,7 +2,8 @@
   description = "Nix0S Flake File";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,53 +14,59 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    astronvim = {
+      url = "github:AstroNvim/AstroNvim/v3.35.0";
+      flake = false;
+    };
     agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = { self, nixpkgs, home-manager, nur, nixos-hardware, nixos-generators, agenix, ... } @ inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nur, nixos-hardware, nixos-generators, agenix, ... } @ inputs:
   let
-    inherit (self) outputs;
-    system = "x86_64-linux";
-    stateVersion = "23.05";
-    libx = import ./lib { inherit inputs outputs stateVersion; };
-  in
-  {
-    nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./hosts/nixos/configuration.nix
+    username = "joe";
+    userfullname = "Joe Sullivan";
+    useremail = "joe@truckstop.cloud";
+    x64_system = "x86_64-linux";
+    arm_system = "aarch64-linux";
+    allSystems = [x64_system arm_system];
+
+    nixosSystem = import ./lib/nixosSystem.nix;
+
+  in {
+    nixosConfigurations = 
+    let
+      oxygen_modules_gnome = {
+        nixos-modules = [
+          ./hosts/oxygen 
+          ./desktop/gnome.nix
           agenix.nixosModules.default
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useUserPackages = true;
-              useGlobalPkgs = true;
-              users.joe = ./home-manager/home.nix;
-            };
-          }
+          {nixpkgs.overlays = [ nur.overlay ];}
         ];
+        home-module = import ./home/home.nix;
       };
-      oxygen = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./hosts/oxygen/configuration.nix
-          nixos-hardware.nixosModules.dell-xps-13-9350
-          agenix.nixosModules.default
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useUserPackages = true;
-              useGlobalPkgs = true;
-              users.joe = ./home-manager/home.nix;
-            };
-          }
-        ];
+      system = x64_system;
+      specialArgs = {
+        pkgs-unstable = import nixpkgs-unstable {
+          system = x64_system;
+          config.allowUnfree = true;
+        };
+      }
+      // inputs;
+      base_args = {
+        inherit home-manager nixos-generators system specialArgs;
       };
+      stable_args = base_args // {inherit nixpkgs;};
+      unstable_args = base_args // {nixpkgs = nixpkgs-unstable;};
+    in {
+      oxygen_gnome = nixosSystem (oxygen_modules_gnome // stable_args);
     };
-    devShells = libx.forAllSystems (system:
-      let pkgs = nixpkgs.legacyPackages.${system};
-      in import ./shell.nix { inherit pkgs; }
-    );
+    packages."${x64_system}" = 
+      nixpkgs.lib.genAttrs [
+        "oxygen_gnome"
+      ] (
+        host:
+          self.nixosConfigurations.${host}.config.formats.iso
+        );
+
   };
 }
