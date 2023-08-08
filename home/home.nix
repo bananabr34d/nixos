@@ -3,7 +3,8 @@
 {
   imports = [
     ./zsh.nix
-    ./nvim.nix
+    # ./nvim.nix
+    ./neovim
     ./kitty.nix
     ./firefox.nix
   ];
