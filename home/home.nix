@@ -2,11 +2,12 @@
 
 {
   imports = [
-    ./zsh.nix
-    # ./nvim.nix
-    ./neovim
-    ./kitty.nix
     ./firefox.nix
+    ./kitty.nix
+    ./neovim
+    # ./nvim.nix
+    ./vorta.nix
+    ./zsh.nix
   ];
   home.username = username;
   home.homeDirectory = "/home/${username}";
