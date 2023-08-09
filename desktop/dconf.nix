@@ -27,7 +27,6 @@ in {
     "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
     "org/gnome/desktop/sound" = { theme-name = "freedesktop"; };
     "org/gnome/desktop/input-sources" = {
-      sources = map mkTuple [ [ "xkb" "us" ] [ "ibus" "mozc-jp" ] ];
       xkb-options = [ "compose:ralt" ];
     };
 
@@ -85,8 +84,8 @@ in {
     };
     "org/gnome/settings-daemon/plugins/color" = {
       night-light-enabled = true;
-      night-light-last-coordinates = mkTuple [ 53.2593 10.4 ];
-      night-light-temperature = mkUint32 3700;
+      # night-light-last-coordinates = mkTuple [ 53.2593 10.4 ];
+      # night-light-temperature = mkUint32 3700;
     };
     "org/gnome/settings-daemon/plugins/media-keys" = {
       screensaver = [ "<Super>Escape" ];
