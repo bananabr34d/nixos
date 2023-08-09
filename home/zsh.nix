@@ -7,7 +7,7 @@
     oh-my-zsh = {
       enable = true;
       plugins = [ "docker-compose" "docker" ];
-      theme = "robbyrussell";
+      theme = "amuse";
     };
     initExtra = ''
       bindkey '^f' autosuggest-accept

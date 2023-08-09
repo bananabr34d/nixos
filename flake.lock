@@ -1,5 +1,4 @@
-{
-  "nodes": {
+{ "nodes": {
     "agenix": {
       "inputs": {
         "darwin": "darwin",
