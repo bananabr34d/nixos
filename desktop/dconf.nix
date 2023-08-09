@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   left = "h";
@@ -6,7 +6,7 @@ let
   up = "k";
   right = "l";
 in {
-  dconf.settings = with lib.hm.gvariant; {
+  dconf.settings = {
     "org/gnome/shell" = {
       disable-user-extensions = false;
       enabled-extensions = [
