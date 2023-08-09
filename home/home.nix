@@ -11,6 +11,7 @@
   home.username = username;
   home.homeDirectory = "/home/${username}";
   home.stateVersion = "23.05";
+  home.file.".face".source = ./face.jpeg;
   home.packages = with pkgs; [
     telegram-desktop
     bat
