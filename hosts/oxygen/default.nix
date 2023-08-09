@@ -82,7 +82,7 @@
     hashedPassword = "$y$j9T$h/hw.aiwCewxYqcQZrj0j/$.Z8G1p2BfVDRHS6Pee4PciEXXhSHLFbUlyBVoPzg3v4";
     isNormalUser = true;
     description = "joe";
-    icon = "/home/joe/.face";
+    home = "/home/joe";
     shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     openssh.authorizedKeys.keys = [

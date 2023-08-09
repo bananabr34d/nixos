@@ -1,5 +1,5 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./x11.nix ./wayland.nix ./gtk.nix ./gnome.nix ];
+  imports = [ ./dconf.nix ./gnome.nix ./gtk.nix ./wayland.nix ./x11.nix ];
 }
