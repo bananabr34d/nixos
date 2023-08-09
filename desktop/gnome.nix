@@ -35,6 +35,7 @@
     night-light-temperature=uint32 3700
   '';
   programs.xwayland.enable = true;
+  programs.dconf.enable = true;
 
   # exclude some default applications
   environment.gnome.excludePackages = with pkgs; [
