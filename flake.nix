@@ -21,8 +21,17 @@
     agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nur, nixos-hardware, nixos-generators, agenix, ... } @ inputs:
-  let
+  outputs = {
+    self,
+    nixpkgs,
+    nixpkgs-unstable,
+    home-manager,
+    nur,
+    nixos-hardware,
+    nixos-generators,
+    agenix,
+    ...
+  } @ inputs: let
     username = "joe";
     userfullname = "Joe Sullivan";
     useremail = "joe@truckstop.cloud";
@@ -31,28 +40,27 @@
     allSystems = [x64_system arm_system];
 
     nixosSystem = import ./lib/nixosSystem.nix;
-
   in {
-    nixosConfigurations = 
-    let
+    nixosConfigurations = let
       oxygen_modules_gnome = {
         nixos-modules = [
-          ./hosts/oxygen 
+          ./hosts/oxygen
           ./desktop/gnome.nix
           agenix.nixosModules.default
-          {nixpkgs.overlays = [ nur.overlay ];}
+          {nixpkgs.overlays = [nur.overlay];}
         ];
         home-module = import ./home/home.nix;
       };
       system = x64_system;
-      specialArgs = {
-        inherit username userfullname useremail;
-        pkgs-unstable = import nixpkgs-unstable {
-          system = x64_system;
-          config.allowUnfree = true;
-        };
-      }
-      // inputs;
+      specialArgs =
+        {
+          inherit username userfullname useremail;
+          pkgs-unstable = import nixpkgs-unstable {
+            system = x64_system;
+            config.allowUnfree = true;
+          };
+        }
+        // inputs;
       base_args = {
         inherit home-manager nixos-generators system specialArgs;
       };
@@ -61,13 +69,13 @@
     in {
       oxygen_gnome = nixosSystem (oxygen_modules_gnome // stable_args);
     };
-#    packages."${x64_system}" = 
-#      nixpkgs.lib.genAttrs [
-#        "oxygen_gnome"
-#      ] (
-#        host:
-#          self.nixosConfigurations.${host}.config.formats.iso
-#        );
-#
+    #    packages."${x64_system}" =
+    #      nixpkgs.lib.genAttrs [
+    #        "oxygen_gnome"
+    #      ] (
+    #        host:
+    #          self.nixosConfigurations.${host}.config.formats.iso
+    #        );
+    #
   };
 }

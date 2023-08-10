@@ -79,7 +79,7 @@
           auto-tab-discard
           bitwarden
           browserpass
-#          bypass-paywalls-clean
+         # bypass-paywalls-clean
           cookie-autodelete
           darkreader
           form-history-control
