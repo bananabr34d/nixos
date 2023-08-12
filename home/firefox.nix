@@ -75,7 +75,7 @@
         };
 
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          anchors-reveal
+          # anchors-reveal
           auto-tab-discard
           bitwarden
           browserpass
@@ -85,13 +85,13 @@
           form-history-control
           libredirect
           link-cleaner
-          linkhints
+          # linkhints
           multi-account-containers
           offline-qr-code-generator
-          reddit-enhancement-suite
+          # reddit-enhancement-suite
           skip-redirect
           tree-style-tab
-          tst-tab-search
+          # tst-tab-search
           ublock-origin
           vimium
         ];
