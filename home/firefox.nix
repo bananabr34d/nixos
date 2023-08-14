@@ -34,8 +34,7 @@
           "extensions.unifiedExtensions.enabled" = false;
           "general.smoothScroll" = false;
           "geo.enabled" = false;
-          "gfx.webrender.all" = true;
-          "layout.css.devPixelsPerPx" = 1;
+          "gfx.webrender.all" = true; "layout.css.devPixelsPerPx" = 1;
           # Follow system color theme.
           "layout.css.prefers-color-scheme.content-override" = 2;
           "media.ffmpeg.vaapi.enabled" = true;

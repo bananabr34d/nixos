@@ -14,6 +14,7 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # btrfs-assistant.url = "github:nixos/nixpkgs/7f6f891";
     astronvim = {
       url = "github:AstroNvim/AstroNvim/v3.35.0";
       flake = false;

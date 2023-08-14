@@ -53,6 +53,7 @@
     ghostscript
     xclip
     yt-dlp
+    zoxide
   ];
   programs = {
     neovim = {
