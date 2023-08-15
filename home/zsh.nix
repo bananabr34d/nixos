@@ -11,7 +11,6 @@
     };
     initExtra = ''
       bindkey '^f' autosuggest-accept
-      eval "$(${cfg.package}/bin/zoxide init zsh ${cfgOptions})"
     '';
   };
 
