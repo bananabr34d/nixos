@@ -4,7 +4,7 @@
   programs.firefox = {
     enable = true;
     profiles = {
-      default = {
+      joe = {
         isDefault = true;
         settings = {
           "beacon.enabled" = false;
